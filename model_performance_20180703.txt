@@ -1,0 +1,227 @@
+Classification results for directory: All
+
+Number marked negative: 5
+Number marked positive: 2756
+Number unmarked: 61846
+
+Number predicted negative: 48189
+Number predicted positive: 16418
+
+Number with size extracted: 4762
+Number with location extracted: 2409
+Number with lung (right/left) extracted: 2507
+Number with growth extracted: 131
+
+Percent predicted correctly when marked negative: 0.8
+Percent predicted correctly when marked positive: 0.9967343976777939
+Predictions when unmarked:
+0    48176
+1    13670
+Name: prediction, dtype: int64
+
+Classification Report based off of Vetted data
+             precision    recall  f1-score   support
+
+          0       0.80      0.31      0.44        13
+          1       1.00      1.00      1.00      2748
+
+avg / total       1.00      1.00      1.00      2761
+
+
+Classification results for directory: phHealth
+
+Number marked negative: 0
+Number marked positive: 22
+Number unmarked: 19979
+
+Number predicted negative: 17485
+Number predicted positive: 2516
+
+Number with size extracted: 441
+Number with location extracted: 180
+Number with lung (right/left) extracted: 183
+Number with growth extracted: 1
+
+Percent predicted correctly when marked positive: 0.9090909090909091
+Predictions when unmarked:
+0    17483
+1     2496
+Name: prediction, dtype: int64
+
+Classification Report based off of Vetted data
+             precision    recall  f1-score   support
+
+          0       0.00      0.00      0.00         2
+          1       0.91      1.00      0.95        20
+
+avg / total       0.83      0.91      0.87        22
+
+
+Classification results for directory: powerscribe
+
+Number marked negative: 5
+Number marked positive: 1970
+Number unmarked: 285
+
+Number predicted negative: 88
+Number predicted positive: 2172
+
+Number with size extracted: 1799
+Number with location extracted: 1005
+Number with lung (right/left) extracted: 1044
+Number with growth extracted: 67
+
+Percent predicted correctly when marked negative: 0.8
+Percent predicted correctly when marked positive: 0.9964467005076142
+Predictions when unmarked:
+1    208
+0     77
+Name: prediction, dtype: int64
+
+Classification Report based off of Vetted data
+             precision    recall  f1-score   support
+
+          0       0.80      0.36      0.50        11
+          1       1.00      1.00      1.00      1964
+
+avg / total       1.00      1.00      1.00      1975
+
+
+Classification results for directory: Riaco
+
+Number marked negative: 0
+Number marked positive: 0
+Number unmarked: 972
+
+Number predicted negative: 0
+Number predicted positive: 972
+
+Number with size extracted: 612
+Number with location extracted: 258
+Number with lung (right/left) extracted: 272
+Number with growth extracted: 2
+
+Predictions when unmarked:
+1    972
+Name: prediction, dtype: int64
+
+
+Classification results for directory: MUSC
+
+Number marked negative: 0
+Number marked positive: 137
+Number unmarked: 521
+
+Number predicted negative: 112
+Number predicted positive: 546
+
+Number with size extracted: 449
+Number with location extracted: 315
+Number with lung (right/left) extracted: 316
+Number with growth extracted: 21
+
+Percent predicted correctly when marked positive: 1.0
+Predictions when unmarked:
+1    409
+0    112
+Name: prediction, dtype: int64
+
+Classification Report based off of Vetted data
+             precision    recall  f1-score   support
+
+          1       1.00      1.00      1.00       137
+
+avg / total       1.00      1.00      1.00       137
+
+
+Classification results for directory: Community
+
+Number marked negative: 0
+Number marked positive: 0
+Number unmarked: 20001
+
+Number predicted negative: 16818
+Number predicted positive: 3183
+
+Number with size extracted: 436
+Number with location extracted: 176
+Number with lung (right/left) extracted: 184
+Number with growth extracted: 22
+
+Predictions when unmarked:
+0    16818
+1     3183
+Name: prediction, dtype: int64
+
+
+Classification results for directory: CCF
+
+Number marked negative: 0
+Number marked positive: 607
+Number unmarked: 0
+
+Number predicted negative: 0
+Number predicted positive: 607
+
+Number with size extracted: 582
+Number with location extracted: 256
+Number with lung (right/left) extracted: 277
+Number with growth extracted: 0
+
+Percent predicted correctly when marked positive: 1.0
+
+Classification Report based off of Vetted data
+             precision    recall  f1-score   support
+
+          1       1.00      1.00      1.00       607
+
+avg / total       1.00      1.00      1.00       607
+
+
+Classification results for directory: HCA
+
+Number marked negative: 0
+Number marked positive: 0
+Number unmarked: 107
+
+Number predicted negative: 107
+Number predicted positive: 0
+
+Number with size extracted: 0
+Number with location extracted: 0
+Number with lung (right/left) extracted: 0
+Number with growth extracted: 0
+
+Predictions when unmarked:
+0    107
+Name: prediction, dtype: int64
+
+
+Classification results for directory: Haymed
+
+Number marked negative: 0
+Number marked positive: 20
+Number unmarked: 19981
+
+Number predicted negative: 13579
+Number predicted positive: 6422
+
+Number with size extracted: 443
+Number with location extracted: 219
+Number with lung (right/left) extracted: 231
+Number with growth extracted: 18
+
+Percent predicted correctly when marked positive: 1.0
+Predictions when unmarked:
+0    13579
+1     6402
+Name: prediction, dtype: int64
+
+Classification Report based off of Vetted data
+             precision    recall  f1-score   support
+
+          1       1.00      1.00      1.00        20
+
+avg / total       1.00      1.00      1.00        20
+
+

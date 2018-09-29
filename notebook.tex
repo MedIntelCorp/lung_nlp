@@ -1,0 +1,784 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Testing-Copy1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{nodule\PYZus{}parser}
+        \PY{k+kn}{import} \PY{n+nn}{nodule\PYZus{}learner}
+        \PY{k+kn}{import} \PY{n+nn}{nodule\PYZus{}extractor}
+        \PY{k+kn}{import} \PY{n+nn}{imp}
+        \PY{n}{imp}\PY{o}{.}\PY{n}{reload}\PY{p}{(}\PY{n}{nodule\PYZus{}parser}\PY{p}{)}
+        \PY{n}{imp}\PY{o}{.}\PY{n}{reload}\PY{p}{(}\PY{n}{nodule\PYZus{}learner}\PY{p}{)}
+        \PY{n}{imp}\PY{o}{.}\PY{n}{reload}\PY{p}{(}\PY{n}{nodule\PYZus{}extractor}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{json}
+        
+        \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{nl} \PY{o}{=} \PY{n}{nodule\PYZus{}learner}\PY{o}{.}\PY{n}{NoduleLearner}\PY{p}{(}\PY{n}{cache\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+\end{Verbatim}
+
+    def extract_nodules(self, phrases):
+        nodules = []
+        for phrase in phrases:
+            size, numeric_size = self.extract_size(phrase['nodule_phrase'])
+            location = self.extract_location(phrase['nodule_phrase'])
+            lung = self.extract_lung(phrase['nodule_phrase'])
+            phrase.update({'nodule_size': size, 'nodule_location': location, 'nodule_size_numeric': numeric_size,
+                          'nodule_lung': lung, 'is_nodule': 'Yes'})
+            nodules.append(phrase)
+        # grabs the information about the largest nodule found
+        max_nodule = self.get_max_nodule(nodules)
+        max_nodule['max_nodule_size_numeric'] = self.get_numeric_size(max_nodule['max_nodule_size'])
+        output = [{**x, **max_nodule} for x in nodules]                                                                              
+        return output
+    \subsection{NLP Nodule Learner}\label{nlp-nodule-learner}
+
+\subsubsection{Description}\label{description}
+
+This repository contains a supervised classification model for
+predicting whether a patient has a pulmonary nodule based on the
+doctor's comments in a report about the patient in question. For
+patients predicted to have a pulmonary nodule, the size and location of
+that nodule will also be extracted.
+
+\subsubsection{Usage}\label{usage}
+
+To use, first create an instance of the \texttt{NoduleLearner} class,
+then call the \texttt{transform\_predict} instance method on a file
+containing the doctor's report from which to make the prediction, as
+follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nl }\OperatorTok{=}\NormalTok{ NoduleLearner()}
+\NormalTok{prediction }\OperatorTok{=}\NormalTok{ nl.transform_predict(file_name)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{transform\_predict()} method by default doesn't actually
+make predictions, but rather transforms the data and caches it, later
+making the actual predictions once the \texttt{cache\_size} is reached
+(default size is 500, but this can be set when instantiating the
+\texttt{NoduleLearner} class). If the learner finishes looping through
+the files and there are still some left to predict, simply call
+\texttt{nl.dump\_predictions()} (you'll stil need to set the
+\texttt{probability} and \texttt{vetting} arguments) to make the
+predictions on the rest of the records left in the cache.
+
+There are three arguments to \texttt{transform\_predict()}, the latter
+two of which default to \texttt{False}:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{file} (\texttt{str}): the file on which to perform the
+  predictions
+\item
+  \texttt{probability} (\texttt{bool}): whether or not to output
+  predictions for the nodule classifications
+\item
+  \texttt{vetting} (\texttt{bool}): whether to output data needed to vet
+  the extractions (more on that below)
+\end{itemize}
+
+When not vetting the extractions (\texttt{vetting=False}), the model
+outputs the following data for each record:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{directory\ (str)}: the folder from which the file came (can be
+  useful for traceability)
+\item
+  \texttt{filename\ (str)}: the filename of the file, minus the
+  extension
+\item
+  \texttt{max\_nodule\_change\ (float)}: if there is a previous record
+  for the patient which also contains a nodule size, this is the
+  difference in size of the largest nodule seen in the patient record
+\item
+  \texttt{max\_nodule\_location\ (str)}: the location of the largest
+  nodule extracted; one of left upper lobe, lingula, left lower lobe,
+  right upper lobe, right middle lobe, right lower lobe, or ''
+  (indicating no location was found)
+\item
+  \texttt{max\_nodule\_lung\ (str)}: the lung in which the largest
+  extracted nodule was located; one of left, right, or ''
+\item
+  \texttt{max\_nodule\_size\ (str)}: the size of the largest nodule, in
+  millimeters
+\item
+  \texttt{evidence\ (str)}: the phrases extracted that contained terms
+  indicating the possible presence of nodules, from which the largest
+  nodule was extracted, if there was one
+\item
+  \texttt{pid\ (str)}: the patient ID for the record in question
+\item
+  \texttt{prediction\ (int)}: the prediction for whether or not the
+  report indicates the presence of a pulmonary nodule; either 0
+  (negative) or 1 (positive)
+\item
+  \texttt{probability\ (float)}: (if \texttt{probability=True}) the
+  model's confidence in the prediction, on 0 (least confident) to 1
+  (most confident) scale
+\item
+  \texttt{report\_date}: the date of the report in question (used for
+  tracking the growth of the largest nodule)
+\item
+  \texttt{prev\_max\_date}: the date of the previous largest nodule
+  (used for tracking the growth of the largest nodule)
+\end{itemize}
+
+If \texttt{vetting} is set to \texttt{True}, the following fields will
+also be present in the output:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{is\_nodule\ (int)}: whether or not the phrase in question
+  contains evidence of a pulmonary nodule, 0 for negative, 1 for
+  positive
+\item
+  \texttt{nodule\_location\ (str)}: the extracted location of the nodule
+  in the phrase in question (same parameters as for
+  \texttt{max\_nodule\_location} above)
+\item
+  \texttt{nodule\_lung\ (str)}: the extracted lung of the nodule in the
+  phrase in question
+\item
+  \texttt{nodule\_size\ (str)}: the extracted size of the nodule, in
+  string form (i.e. "5 mm", etc.)
+\item
+  \texttt{nodule\_size\_numeric\ (float)}: the extracted size of the
+  nodule, in float form (same as for \texttt{max\_nodule\_size} above)
+\item
+  \texttt{phrase\_counter\ (int)}: an integer value to differentiate the
+  phrases pulled out of a record that contain a term for a nodule
+\end{itemize}
+
+Each of the values above, minus the \texttt{phrase\_counter}, must be
+vetted in order to measure and improve the performance of the nodule
+extractor (the part that identifies size, location, and lung of the
+largest nodule).
+
+The output will be in the form of a JSON array.
+
+Note: these are output in an array since some files contain more than
+one patient record within the file.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{traceback}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        
+        \PY{k}{def} \PY{n+nf}{warn\PYZus{}with\PYZus{}traceback}\PY{p}{(}\PY{n}{message}\PY{p}{,} \PY{n}{category}\PY{p}{,} \PY{n}{filename}\PY{p}{,} \PY{n}{lineno}\PY{p}{,} \PY{n}{file}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+        
+            \PY{n}{log} \PY{o}{=} \PY{n}{file} \PY{k}{if} \PY{n+nb}{hasattr}\PY{p}{(}\PY{n}{file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{write}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{else} \PY{n}{sys}\PY{o}{.}\PY{n}{stderr}
+            \PY{n}{traceback}\PY{o}{.}\PY{n}{print\PYZus{}stack}\PY{p}{(}\PY{n}{file}\PY{o}{=}\PY{n}{log}\PY{p}{)}
+            \PY{n}{log}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{warnings}\PY{o}{.}\PY{n}{formatwarning}\PY{p}{(}\PY{n}{message}\PY{p}{,} \PY{n}{category}\PY{p}{,} \PY{n}{filename}\PY{p}{,} \PY{n}{lineno}\PY{p}{,} \PY{n}{line}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{showwarning} \PY{o}{=} \PY{n}{warn\PYZus{}with\PYZus{}traceback}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         
+         \PY{c+c1}{\PYZsh{} top = \PYZdq{}../data\PYZhy{}20180319/\PYZdq{}}
+         
+         \PY{n}{top} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../data\PYZhy{}20180629/}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{n}{predictions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} for folder in os.listdir(top)[2:4]:}
+         \PY{k}{for} \PY{n}{folder} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{top}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{reading in data from }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{folder}\PY{p}{)}
+             \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{top} \PY{o}{+} \PY{n}{folder}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{predictions} \PY{o}{+}\PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}
+                     \PY{n}{nl}\PY{o}{.}\PY{n}{transform\PYZus{}predict}\PY{p}{(}
+                         \PY{n}{file}\PY{o}{=}\PY{n}{top} \PY{o}{+} \PY{n}{folder} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{file}\PY{p}{,}
+                         \PY{n}{probability}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                         \PY{n}{vetting}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{counter} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{:}
+                     \PY{k}{break}
+                 \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}   
+                 
+         \PY{n}{predictions\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}df}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}\PY{p}{)}\PY{o}{.}\PY{n}{seconds}\PY{p}{)}
+         \PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+reading in data from phHealth
+reading in data from SCL\_powerscribe
+reading in data from Riaco
+reading in data from MUSC
+reading in data from Community
+reading in data from CCF
+reading in data from HCA
+reading in data from Haymed
+reading in data from SCL
+1242
+19
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:}                    directory evidence                                filename  \textbackslash{}
+         0  ..\_data-20180629\_phHealth           Q334431879T337959163\_20180216171404198   
+         1  ..\_data-20180629\_phHealth           Q334431910T337959194\_20180216171404479   
+         2  ..\_data-20180629\_phHealth           Q334432023T337959308\_20180216171404776   
+         3  ..\_data-20180629\_phHealth           Q334432179T337959465\_20180216171405604   
+         4  ..\_data-20180629\_phHealth           Q334432430T337959717\_20180216171405808   
+         
+            is\_nodule  max\_nodule\_change max\_nodule\_location max\_nodule\_lung  \textbackslash{}
+         0          0                0.0                                       
+         1          0                0.0                                       
+         2          0                0.0                                       
+         3          0                0.0                                       
+         4          0                0.0                                       
+         
+            max\_nodule\_size nodule\_location nodule\_lung nodule\_phrase nodule\_size  \textbackslash{}
+         0              0.0                                                         
+         1              0.0                                                         
+         2              0.0                                                         
+         3              0.0                                                         
+         4              0.0                                                         
+         
+            nodule\_size\_numeric  phrase\_counter        pid  prediction prev\_max\_date  \textbackslash{}
+         0                  0.0               0  000517294           0                 
+         1                  0.0               0  000934678           0                 
+         2                  0.0               0  000416031           0                 
+         3                  0.0               0  000380339           0                 
+         4                  0.0               0  000469975           0                 
+         
+            probability report\_date  
+         0        1.000    20180216  
+         1        0.998    20180216  
+         2        0.998    20180216  
+         3        0.951    20180216  
+         4        0.984    20180216  
+\end{Verbatim}
+            
+    \section{count by dir of records and unique patiants with nodule
+size}\label{count-by-dir-of-records-and-unique-patiants-with-nodule-size}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{nodule\PYZus{}size} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{directory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PYZbs{}
+              \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nodule\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{p}{)} \PY{p}{\PYZcb{}}  \PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}119}]:}                            nodule\_size  pid
+          directory                                  
+          ..\_data-20180629\_CCF                 4    1
+          ..\_data-20180629\_MUSC                1    1
+          ..\_data-20180629\_Riaco               8    1
+          ..\_data-20180629\_phHealth           51   17
+\end{Verbatim}
+            
+    \section{count by dir of records and unique patiants with nodule
+location}\label{count-by-dir-of-records-and-unique-patiants-with-nodule-location}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{nodule\PYZus{}location} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{directory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PYZbs{}
+              \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nodule\PYZus{}location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{p}{)} \PY{p}{\PYZcb{}}  \PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}120}]:}                            nodule\_location  pid
+          directory                                      
+          ..\_data-20180629\_CCF                     4    1
+          ..\_data-20180629\_MUSC                    2    1
+          ..\_data-20180629\_Riaco                   4    1
+          ..\_data-20180629\_phHealth               34   13
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{c+c1}{\PYZsh{} breakdown of location counts}
+          \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{nodule\PYZus{}location} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{directory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nodule\PYZus{}location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PYZbs{}
+              \PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filename}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{p}{)} \PY{p}{\PYZcb{}}  \PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}121}]:}                                              filename  pid
+          directory                 nodule\_location                 
+          ..\_data-20180629\_CCF      left lower lobe           3    1
+                                    left upper lobe           1    1
+          ..\_data-20180629\_MUSC     left upper lobe           2    1
+          ..\_data-20180629\_Riaco    left lower lobe           1    1
+                                    left upper lobe           1    1
+                                    lingula                   2    1
+          ..\_data-20180629\_phHealth left lower lobe          10    6
+                                    left upper lobe          14    6
+                                    lingula                   1    1
+                                    right lower lobe          2    2
+                                    right middle lobe         3    2
+                                    right upper lobe          4    2
+\end{Verbatim}
+            
+    \section{number of 'Truth' rows}\label{number-of-truth-rows}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{evidence} \PY{o}{!=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}93}]:} (340, 19)
+\end{Verbatim}
+            
+    \section{count of patiants where growth was recorded and
+details}\label{count-of-patiants-where-growth-was-recorded-and-details}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}177}]:} \PY{n}{growth\PYZus{}huh} \PY{o}{=} \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{nodule\PYZus{}size\PYZus{}numeric} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.0}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PYZbs{}
+              \PY{o}{.}\PY{n}{agg}\PY{p}{(} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nodule\PYZus{}size\PYZus{}numeric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unique}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}nodule\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unique}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nodule\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{\PYZcb{}} \PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+          \PY{n}{growth\PYZus{}huh}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sizehuh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=}\PY{n}{growth\PYZus{}huh}\PY{o}{.}\PY{n}{nodule\PYZus{}size\PYZus{}numeric}\PY{o}{.}\PY{n}{unique}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{p}{)}\PY{p}{)}
+          \PY{n}{growth\PYZus{}huh} \PY{o}{=} \PY{n}{growth\PYZus{}huh}\PY{p}{[}\PY{n}{growth\PYZus{}huh}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sizehuh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{growth\PYZus{}huh}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}177}]:}             pid                  nodule\_size\_numeric max\_nodule\_size  \textbackslash{}
+                                                        unique          unique   
+          2     000320561                         [13.0, 35.0]          [35.0]   
+          5     000333507                           [3.0, 5.0]           [5.0]   
+          6     000333800  [40.0, 20.0, 10.0, 9.0, 19.0, 26.0]     [40.0, 0.0]   
+          11    000423447                [6.0, 12.0, 5.0, 3.0]          [12.0]   
+          13    000450397                           [5.0, 6.0]           [6.0]   
+          15    000514715                [17.0, 5.0, 4.0, 6.0]          [17.0]   
+          16    000544895                         [23.0, 53.0]          [53.0]   
+          17  00071748995                           [5.0, 2.0]           [5.0]   
+          19       765110           [3.0, 6.0, 2.0, 8.0, 20.0]          [20.0]   
+          
+             nodule\_size         sizehuh  
+                     min     max          
+          2       1.3 cm  3.5 cm       2  
+          5       0.3 cm  0.5 cm       2  
+          6       0.9 cm    4 cm       6  
+          11       12 mm    6 mm       4  
+          13        5 mm    6 mm       2  
+          15       17 mm    6 mm       4  
+          16      2.3 cm  5.3 cm       2  
+          17        2 mm    5 mm       2  
+          19        2 mm    8 mm       5  
+\end{Verbatim}
+            
+    \section{number of patiants with
+growth}\label{number-of-patiants-with-growth}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}179}]:} \PY{n}{growth\PYZus{}huh}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}179}]:} (9, 6)
+\end{Verbatim}
+            
+    \section{count of each 'phrase'}\label{count-of-each-phrase}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nodule\PYZus{}phrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}                                                                                                                                                                                                                                                                                                                                                                                                                               904
+        ct of the pelvis: no pelvic mass or lymphadenopathy is present                                                                                                                                                                                                                                                                                                                                                                 20
+        no pancreatic mass or inflammatory process is present                                                                                                                                                                                                                                                                                                                                                                          17
+        ct of the abdomen: no hepatic mass or biliary ductal dilatation is present                                                                                                                                                                                                                                                                                                                                                     15
+        there is no renal parenchymal mass or hydronephrosis                                                                                                                                                                                                                                                                                                                                                                           11
+        evaluation the upper abdomen demonstrates no mass or adenopathy                                                                                                                                                                                                                                                                                                                                                                 8
+        no infiltrate, mass or pleural effusion is present                                                                                                                                                                                                                                                                                                                                                                              7
+        there is no focal mass, consolidation, or pneumothorax                                                                                                                                                                                                                                                                                                                                                                          6
+        no mass                                                                                                                                                                                                                                                                                                                                                                                                                         5
+        no renal parenchymal mass or hydronephrosis is present                                                                                                                                                                                                                                                                                                                                                                          5
+        no hepatic mass or biliary ductal dilatation is present                                                                                                                                                                                                                                                                                                                                                                         4
+        no infiltrate, mass, effusion or pneumothorax is present                                                                                                                                                                                                                                                                                                                                                                        4
+        there is mild opacification of the mastoid air cells on the right                                                                                                                                                                                                                                                                                                                                                               3
+        no paraspinal mass or fluid collection is present                                                                                                                                                                                                                                                                                                                                                                               3
+        there is no intracranial mass                                                                                                                                                                                                                                                                                                                                                                                                   3
+        there is no consolidating infiltrate, mass, effusion or pneumothorax                                                                                                                                                                                                                                                                                                                                                            3
+        no intracranial mass, hemorrhage or acute ischemia                                                                                                                                                                                                                                                                                                                                                                              3
+        brain: abnormalities of the sella including destruction and or postsurgical change of the sellar floor and osteolytic lesion of the clivus , which could include a poorly defined mass and or infiltrative soft tissue                                                                                                                                                                                                          2
+        right mastoid partial coalescent opacification, as per head ct report                                                                                                                                                                                                                                                                                                                                                           2
+        mucosal thickening opacification of a few right anterior ethmoid air cells                                                                                                                                                                                                                                                                                                                                                      2
+        there is a stable 8 mm x 6 mm lobulated enhancing mass at the left cerebral pontine angle                                                                                                                                                                                                                                                                                                                                       2
+        no definite liver mass                                                                                                                                                                                                                                                                                                                                                                                                          2
+        no recurrent mass or fluid collection is present                                                                                                                                                                                                                                                                                                                                                                                2
+        no suspicious nodules are present                                                                                                                                                                                                                                                                                                                                                                                               2
+        no new pulmonary nodules are present                                                                                                                                                                                                                                                                                                                                                                                            2
+        destructive osteolytic process of the central skull base with poorly defined soft tissue mass and or amorphous infiltrative soft tissue                                                                                                                                                                                                                                                                                         2
+        mastoid air cells: partial opacification of bilateral mastoid air cells, clinically exclude mastoiditis                                                                                                                                                                                                                                                                                                                         2
+        there is no solid renal parenchymal mass or hydronephrosis                                                                                                                                                                                                                                                                                                                                                                      2
+        no additional mass or cystic fluid collections are present                                                                                                                                                                                                                                                                                                                                                                      2
+        there is no procedure exam date time accession status ct thorax w o contrast 2 13 10:47 est 01-ct-18- modified ct abdomen pelvis w o 2 13 10:47 est 01-ct-18- modified contrast report focal mass, consolidation, or pneumothorax                                                                                                                                                                                               2
+                                                                                                                                                                                                                                                                                                                                                                                                                                     {\ldots} 
+        procedure exam date time accession status ct thorax w o contrast 2 12 16:09 est 01-ct-18- auth verified report exam: ct chest without intravenous contrast clinical history: 55 years old, male; screening exam; annual physical; patient hx: pt states yearly checkup, no complaints at present time, hx multiple lung nodules technique: axial computed tomography images of the chest without intravenous contrast           1
+        pet ct abdomen and pelvis: again noted are multiple small areas of ill-defined soft tissue density with focal fdg avidity in the left pararenal space and left retroperitoneum                                                                                                                                                                                                                                                  1
+        with a 0.5 x 0.2 x 0.3 cm circumscribed oval hypoechoic mass with a central fatty hilum suggested                                                                                                                                                                                                                                                                                                                               1
+        no mass or lobar consolidation is present                                                                                                                                                                                                                                                                                                                                                                                       1
+        findings: corresponding to the previously described mammographic mass within the upper outer left breast posterior depth                                                                                                                                                                                                                                                                                                        1
+        no infiltrate or mass is present                                                                                                                                                                                                                                                                                                                                                                                                1
+        stable irregular density and fdg avidity along the anterior pelvic wall incision                                                                                                                                                                                                                                                                                                                                                1
+        there are innumerable sub-5 mm groundglass nodules visualized throughout the upper lobes of both lungs as well as the right middle lobe                                                                                                                                                                                                                                                                                         1
+        procedure exam date time accession status ct thorax w contrast 2 15 12:55 est 01-ct-18- auth verified report chest ct: clinical information: malignant neoplasm of upper lobe, unspecified bronchus or lun comparison views: chest ct, february 14, protocol: contiguous axial images were obtained from the neck base through the domes of the diaphragm after administration of intravenous nonionic, iodinated contrast      1
+        there is no solid hepatic mass or biliary ductal dilatation                                                                                                                                                                                                                                                                                                                                                                     1
+        there is a 5 mm nodule noted anteriorly within the left costophrenic sulcus                                                                                                                                                                                                                                                                                                                                                     1
+        5 mm nodule is present in the left lung base, unchanged from previous study                                                                                                                                                                                                                                                                                                                                                     1
+        scattered nodules within both lungs remain similar to previous examination                                                                                                                                                                                                                                                                                                                                                      1
+        ct dose mgy ctdi 3.45;ct dose mgy ctdi .;ct dose length product dlp 345.40; radiopharmaceutical administered: 14.72 mci of fdg-18                                                                                                                                                                                                                                                                                               1
+        procedure exam date time accession status xr chest pa and lateral 2 15 09:57 est 01-xr-18- auth verified report chest 2 views: no infiltrate, mass or edema is seen                                                                                                                                                                                                                                                             1
+        lung nodule present yes qb\_y impression: 1                                                                                                                                                                                                                                                                                                                                                                                      1
+        there is a stable subcentimeter right upper lobe pulmonary granuloma                                                                                                                                                                                                                                                                                                                                                            1
+        multiple bilateral pulmonary nodules as described measuring up to approximately 12 mm                                                                                                                                                                                                                                                                                                                                           1
+        procedure exam date time accession status mri brain w w o 2 15 09:25 est 01-mr-18- auth verified contrast report mri brain with and without contrast: history: tinnuitis,mass comparison examination: brain mri, november 1, procedure: multiplanar, multi-echo mri of the brain without and with intravenous contrast was performed                                                                                            1
+        no solid mass is identified                                                                                                                                                                                                                                                                                                                                                                                                     1
+        comparison: ct thorax w o contrast -02-06 13:08 images, no report findings: lungs: a nodule in the left upper lobe has increased in size now measuring approximately 12 x 8 x 17 mm previously measured roughly 7 x 3 x 3 mm series 3 image 110 of the prior exam                                                                                                                                                               1
+        there is no significant mass effect                                                                                                                                                                                                                                                                                                                                                                                             1
+        procedure exam date time accession status xr chest pa and lateral 2 15 09:37 est 01-xr-18- auth verified report chest 2 views: no infiltrate, mass or edema is identified                                                                                                                                                                                                                                                       1
+        a 4 mm indeterminate nodule in the left lower lobe is not significantly changed                                                                                                                                                                                                                                                                                                                                                 1
+        no mass effect                                                                                                                                                                                                                                                                                                                                                                                                                  1
+        no lobar consolidation or mass is present                                                                                                                                                                                                                                                                                                                                                                                       1
+        hepatic steatosis without focal mass or intrahepatic biliary ductal dilatation                                                                                                                                                                                                                                                                                                                                                  1
+        there is no organomegaly or soft tissue mass                                                                                                                                                                                                                                                                                                                                                                                    1
+        an additional nodule in the left upper lobe measures 6 mm and is not significantly changed                                                                                                                                                                                                                                                                                                                                      1
+        there is no focal mass or pneumothorax                                                                                                                                                                                                                                                                                                                                                                                          1
+        Name: nodule\_phrase, Length: 172, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prediction == 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}nodule\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 0.0     128
+        5.0      14
+        13.0     14
+        1.0      12
+        3.0      10
+        40.0      9
+        12.0      7
+        35.0      6
+        17.0      6
+        6.0       6
+        53.0      5
+        60.0      2
+        Name: max\_nodule\_size, dtype: int64
+\end{Verbatim}
+            
+    \section{number of unique patients}\label{number-of-unique-patients}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}180}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{patient\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}180}]:} 24
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
